@@ -14,18 +14,21 @@ const UserList = () => {
     });
 
     useEffect(() => {
+        // Function to fetch users from the server
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('https://localhost:7255/api/user');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
+                // Handle error: for example, you could set a state indicating the error and display a message to the user
             }
         };
 
-        fetchUsers();
+        fetchUsers(); // Fetch users on component mount
     }, []);
 
+    // Function to handle edit button click
     const handleEditClick = (user) => {
         setEditingUserId(user.id);
         setFormData({
@@ -37,28 +40,35 @@ const UserList = () => {
         });
     };
 
+    // Function to handle input change
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     };
 
+    // Function to handle form submission for updating a user
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
             await axios.put(`https://localhost:7255/api/user/${editingUserId}`, formData);
+            // Update the user list with the updated user data
             setUsers((prevUsers) => prevUsers.map((user) => (user.id === editingUserId ? { ...user, ...formData } : user)));
-            setEditingUserId(null);
+            setEditingUserId(null); // Reset editing user ID
         } catch (error) {
             console.error('Error updating user:', error);
+            // Handle error: for example, you could display an error message to the user
         }
     };
 
+    // Function to handle deletion of a user
     const handleDelete = async (id) => {
         try {
             await axios.delete(`https://localhost:7255/api/user/${id}`);
+            // Remove the deleted user from the user list
             setUsers(users.filter(user => user.id !== id));
         } catch (error) {
             console.error('Error deleting user:', error);
+            // Handle error: for example, you could display an error message to the user
         }
     };
 
