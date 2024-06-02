@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# User Management React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple user management application built with React. It allows you to view, create, edit, and delete user details. The app interacts with a backend API to perform CRUD (Create, Read, Update, Delete) operations on user data stored in a MongoDB database.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **View Users**: Displays a list of users fetched from the backend API.
+- **Create User**: Allows adding a new user through a form.
+- **Edit Users**: Allows editing user details directly within the list and updates the changes to the backend API.
+- **Delete Users**: Provides the functionality to delete a user from the list and the backend API.
 
-### `npm start`
+## How It Works
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **UserList**: This component fetches the user data from the backend API and displays it in a table format. It provides buttons for editing and deleting each user, and a form to add a new user.
 
-### `npm test`
+### API Endpoints
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app interacts with the following API endpoints:
 
-### `npm run build`
+- **Fetch Users**: `GET https://localhost:7255/api/user`
+- **Create User**: `POST https://localhost:7255/api/user`
+- **Update User**: `PUT https://localhost:7255/api/user/{id}`
+- **Delete User**: `DELETE https://localhost:7255/api/user/{id}`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Functionality
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Fetch Users**: When the app loads, it sends a GET request to the backend API to fetch all user details and display them in a table.
+- **Create User**: A form is provided to input new user details. Upon submission, a POST request is sent to the backend API to create a new user.
+- **Edit Users**: When the "Edit" button is clicked, input fields are displayed to allow modification of the user's details. Upon submission, a PUT request is sent to the backend API to update the user's information.
+- **Delete Users**: When the "Delete" button is clicked, a DELETE request is sent to the backend API to remove the user from the database. The user is then removed from the displayed list.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the App
 
-### `npm run eject`
+### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js and npm installed on your machine.
+- Backend API running and accessible at `https://localhost:7255`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/user-management-react-app.git
+    cd user-management-react-app
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3. Start the React app:
+    ```bash
+    npm start
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Backend API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Ensure your backend API is running and accessible at `https://localhost:7255`. You can refer to the backend repository [here](https://github.com/geekyharsh01/UserApi) for setup instructions.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
