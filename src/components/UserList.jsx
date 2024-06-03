@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './userList.css'; // Import the CSS file
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
@@ -46,9 +47,29 @@ const UserList = () => {
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     };
 
+    // Function to validate email format
+    const isValidEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     // Function to handle form submission for updating a user
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        const { FirstName, LastName, Address, Email, Location } = formData;
+
+        // Check for empty fields
+        if (!FirstName || !LastName || !Address || !Email || !Location) {
+            alert('All fields are required.');
+            return;
+        }
+
+        // Check for valid email format
+        if (!isValidEmail(Email)) {
+            alert('Incorrect format of email.');
+            return;
+        }
+
         try {
             await axios.put(`https://localhost:7255/api/user/${editingUserId}`, formData);
             // Update the user list with the updated user data
@@ -73,9 +94,9 @@ const UserList = () => {
     };
 
     return (
-        <div>
+        <div className="user-list-container">
             <h2>User List</h2>
-            <Link to="/">Home</Link>
+            <Link to="/" className="home-link">Home</Link>
             <table>
                 <thead>
                     <tr>
@@ -98,6 +119,7 @@ const UserList = () => {
                                             name="FirstName"
                                             value={formData.FirstName}
                                             onChange={handleInputChange}
+                                            className="input-field"
                                         />
                                     </td>
                                     <td>
@@ -106,6 +128,7 @@ const UserList = () => {
                                             name="LastName"
                                             value={formData.LastName}
                                             onChange={handleInputChange}
+                                            className="input-field"
                                         />
                                     </td>
                                     <td>
@@ -114,6 +137,7 @@ const UserList = () => {
                                             name="Address"
                                             value={formData.Address}
                                             onChange={handleInputChange}
+                                            className="input-field"
                                         />
                                     </td>
                                     <td>
@@ -122,6 +146,7 @@ const UserList = () => {
                                             name="Email"
                                             value={formData.Email}
                                             onChange={handleInputChange}
+                                            className="input-field"
                                         />
                                     </td>
                                     <td>
@@ -130,11 +155,12 @@ const UserList = () => {
                                             name="Location"
                                             value={formData.Location}
                                             onChange={handleInputChange}
+                                            className="input-field"
                                         />
                                     </td>
                                     <td>
-                                        <button onClick={handleFormSubmit}>Submit</button>
-                                        <button onClick={() => setEditingUserId(null)}>Cancel</button>
+                                        <button onClick={handleFormSubmit} className="submit-button">Submit</button>
+                                        <button onClick={() => setEditingUserId(null)} className="cancel-button">Cancel</button>
                                     </td>
                                 </>
                             ) : (
@@ -145,8 +171,8 @@ const UserList = () => {
                                     <td>{user.Email}</td>
                                     <td>{user.Location}</td>
                                     <td>
-                                        <button onClick={() => handleEditClick(user)}>Edit</button>
-                                        <button onClick={() => handleDelete(user.id)}>Delete</button>
+                                        <button onClick={() => handleEditClick(user)} className="edit-button">Edit</button>
+                                        <button onClick={() => handleDelete(user.id)} className="delete-button">Delete</button>
                                     </td>
                                 </>
                             )}
